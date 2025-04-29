@@ -6,6 +6,7 @@ use App\Models\Users;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
+
 class UsersTableSeeder extends Seeder
 {
 

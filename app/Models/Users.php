@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+
+use App\Models\Wallets;
 use Illuminate\Foundation\Auth\User as Authenticatable; // <-- importante
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,4 +22,9 @@ class Users extends Authenticatable  {
     protected $hidden = [
         'password'
     ];
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallets::class, 'user_id', 'id');
+    }
 }

@@ -1,21 +1,26 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\RetailersDashBoardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-// Para usuários normais
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// For Users
+Route::get('/dashboard', [DashBoardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-// Para lojistas
-Route::get('/retailers-dashboard', function () {
-    return view('retailers.retailer_dashboard');
-})->middleware(['auth:retailer', 'verified'])->name('retailers.retailer_dashboard');
+// For Retailers
+Route::get('/retailers-dashboard', [RetailersDashBoardController::class, 'index'])
+    ->middleware(['auth:retailer', 'verified'])
+    ->name('retailers.retailer_dashboard');
+
+//return view('retailers.retailer_dashboard');
+
 
 
 Route::middleware('auth')->group(function () {

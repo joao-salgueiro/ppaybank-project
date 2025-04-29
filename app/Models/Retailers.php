@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Wallets;
 
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,8 +13,8 @@ class Retailers extends Authenticatable
 
 
     protected $primaryKey = 'id';
-    public $incrementing = false; // Desativa auto-incremento
-    protected $keyType = 'string'; // Define que o tipo da chave é string (UUID)
+    public $incrementing = false; 
+    protected $keyType = 'string'; 
 
 
     protected $fillable = [
@@ -25,4 +26,9 @@ class Retailers extends Authenticatable
     protected $hidden = [
         'password'
     ];
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallets::class, 'retailer_id', 'id');
+    }
 }
