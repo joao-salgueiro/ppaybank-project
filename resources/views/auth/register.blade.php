@@ -2,6 +2,15 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
+        <div class="mt-4" style="margin-bottom:20px;">
+            <x-input-label for="role" value="User type" />
+            <select name="role" id="role" class="block mt-1 w-full" required>
+                <option value="">-- Select --</option>
+                <option value="user">Commom user</option>
+                <option value="retailer">Retailer</option>
+            </select>
+        </div>
+
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
@@ -14,6 +23,11 @@
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
+            <x-input-label for="document_id" value="CPF/CNPJ" />
+            <x-text-input id="document_id" class="block mt-1 w-full" type="text" name="document_id" required />
         </div>
 
         <!-- Password -->

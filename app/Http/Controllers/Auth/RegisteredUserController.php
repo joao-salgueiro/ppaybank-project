@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Users;
+use App\Models\Retailers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,21 +31,35 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => 'required',
+            'email' => 'required|email|unique:users|unique:retailers',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|in:user,retailer',
+            'document_id' => 'required|unique:users,document_id|unique:retailers,document_id'
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        if ($request->role === 'user') {
+            $user = Users::create([
+                'id' => \Str::uuid(),
+                'name' => $request->name,
+                'email' => $request->email,
+                'document_id' => $request->document_id,
+                'password' => Hash::make($request->password),
+            ]);
+            Auth::login($user);
+            return redirect()->route('dashboard');
+        }
 
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+        if ($request->role === 'retailer') {
+            $retailer = Retailers::create([
+                'id' => \Str::uuid(),
+                'name' => $request->name,
+                'email' => $request->email,
+                'document_id' => $request->document_id,
+                'password' => Hash::make($request->password),
+            ]);
+            Auth::login($retailer);
+            return redirect()->route('retailers.retailer_dashboard');
+        }
     }
 }
