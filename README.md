@@ -1,42 +1,60 @@
-# PicPagar Simplificado
+# Simplified PicPay
 
-Projeto Laravel PicPagar, com suporte a **dois tipos de usuários** (usuários comuns e lojistas) e sistema de carteiras digitais com saldo e transações.
-Rode o Projeto com: php artisan serve
+Laravel PicPay project with support for **two user types** (common users and retailers) and a digital wallet system with balance and transactions.
 
-## 🔧 Tecnologias Utilizadas
+## 🔧 Technologies Used
 
 - Laravel 11.x
 - PHP 8.x
-- SQLite (banco de dados)
-- Laravel Breeze (autenticação simples)
-- UUIDs como chaves primárias
-- Relacionamentos Eloquent
-- Seeders para popular dados de exemplo
+- SQLite (database)
+- Laravel Breeze (simple authentication)
+- UUIDs as primary keys
+- Eloquent relationships
+- Seeders to populate example data
 
-## ⚙️ Funcionalidades
+## ⚙️ Features
 
-- Cadastro e login de **usuários comuns** e **lojistas**
-- Cada tipo de usuário possui uma **carteira digital** (Wallet)
-- Dashboard exibindo saldo da carteira
-- Seeders para popular a base com dados iniciais
-- Estrutura de relacionamentos Eloquent entre `Users`, `Retailers` e `Wallets`
+- Registration and login for **common users** and **retailers**
+- Each user type has a **digital wallet** (Wallet)
+- Dashboard showing wallet balance
+- Seeders to populate the database with initial data
+- Eloquent relationship structure between Users, Retailers, and Wallets
 
-## 📁 Estrutura de Models
+## 📁 Model Structure
 
-- **`Users`**: Representa usuários comuns
-- **`Retailers`**: Representa lojistas
-- **`Wallets`**: Armazena saldo e pertence a `Users` ou `Retailers`
+- **Users**: Represents common users
+- **Retailers**: Represents retailers
+- **Wallets**: Stores balance and belongs to Users or Retailers
 
-### Relações
+### Relationships
 
-- **`Users`** → `hasOne` `Wallet`
-- **`Retailers`** → `hasOne` `Wallet`
-- **`Wallets`** → `belongsTo` `Users` **ou** `Retailers` (via campos `user_id` e `retailer_id`)
-- **`Transactions`**
+- **Users** → hasOne Wallet  
+- **Retailers** → hasOne Wallet  
+- **Wallets** → belongsTo Users **or** Retailers (via `user_id` and `retailer_id` fields)  
+- **Transactions**
 
-## 🧪 Seeders
+## 🚀 How to Run the Project
 
-Para popular o banco com dados de teste, execute o comando abaixo:
+Follow these steps to set up the project in your local environment:
 
 ```bash
+# 1. Install PHP dependencies
+composer install
+
+# 2. Configure environment (create .env file)
+copy .env.example .env
+
+# 3. Generate application key
+php artisan key:generate
+
+# 4. Create and populate database
 php artisan migrate:fresh --seed
+
+# 5. Install JavaScript dependencies
+npm install
+
+# 6. Compile front-end assets
+npm run build
+
+# 7. Start local server
+php artisan serve
