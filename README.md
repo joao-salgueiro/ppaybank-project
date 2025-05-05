@@ -1,6 +1,7 @@
 # PicPagar Simplificado
 
 Projeto Laravel PicPagar, com suporte a **dois tipos de usuários** (usuários comuns e lojistas) e sistema de carteiras digitais com saldo e transações.
+Rode o Projeto com: php artisan serve
 
 ## 🔧 Tecnologias Utilizadas
 
@@ -31,6 +32,7 @@ Projeto Laravel PicPagar, com suporte a **dois tipos de usuários** (usuários c
 - **`Users`** → `hasOne` `Wallet`
 - **`Retailers`** → `hasOne` `Wallet`
 - **`Wallets`** → `belongsTo` `Users` **ou** `Retailers` (via campos `user_id` e `retailer_id`)
+- **`Transactions`**
 
 ## 🧪 Seeders
 
