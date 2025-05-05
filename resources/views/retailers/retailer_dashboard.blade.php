@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h1>Tou are logged as a Retailer</h1>
+                    <h1>You are logged as a Retailer</h1>
                     <p>Your balance available is $ {{ number_format($wallet->balance ?? 0, 2, ',', '.') }}</p>
                 </div>
             </div>
