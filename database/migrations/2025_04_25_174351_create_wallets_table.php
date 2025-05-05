@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('user_id')->nullable();
             $table->uuid('retailer_id')->nullable();
-            $table->decimal('balance', 15, 2)->default(0);
+            $table->decimal('balance', 15, 2)->default(300.00);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

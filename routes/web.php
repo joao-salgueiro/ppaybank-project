@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\RetailersDashBoardController;
+use App\Http\Controllers\TransactionsController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +20,10 @@ Route::get('/dashboard', [DashBoardController::class, 'index'])
 Route::get('/retailers-dashboard', [RetailersDashBoardController::class, 'index'])
     ->middleware(['auth:retailer', 'verified'])
     ->name('retailers.retailer_dashboard');
+
+Route::post('/transfer', [TransactionsController::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('transfer.store');
 
 //return view('retailers.retailer_dashboard');
 

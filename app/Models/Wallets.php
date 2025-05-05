@@ -21,7 +21,9 @@ class Wallets extends Model
         parent::boot();
         static::creating(function ($model) {
             $model->id = (string) \Illuminate\Support\Str::uuid();
+            $model->balance = 300.00;
         });
+        
     }
 
     public function user(): BelongsTo

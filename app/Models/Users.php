@@ -20,6 +20,15 @@ class Users extends Authenticatable  {
         'password'
     ];
 
+    protected static function booted(): void
+    {
+        static::created(function ($user) {
+            $user->wallet()->create([
+                'balance' => 0,
+            ]);
+        });
+    }
+
     protected $hidden = [
         'password'
     ];
